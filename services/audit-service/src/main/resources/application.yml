@@ -1,0 +1,40 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    name: audit-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/audit_db?options=-c%20TimeZone=UTC
+    username: postgres
+    password: postgres
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+        format_sql: true
+    show-sql: false
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+immudb:
+  enabled: true
+  host: localhost
+  port: 3322
+  database: defaultdb
+  username: immudb
+  password: immudb
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

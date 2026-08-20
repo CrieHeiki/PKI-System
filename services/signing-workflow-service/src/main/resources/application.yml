@@ -1,0 +1,50 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: signing-workflow-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/signing_db?options=-c%20TimeZone=UTC
+    username: postgres
+    password: postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      [hibernate.format_sql]: true
+    open-in-view: false
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+jwt:
+  secret: 7s8t1vImBp6aCJ4ePeChxrnRB2IzsQLF8kRn2RgS4dY=
+  access-token-expiration-minutes: 60
+
+app:
+  security:
+    public-paths:
+      - /actuator/health
+
+logging:
+  level:
+    org.springframework.security: INFO
+    com.ct556.signing_workflow_service: DEBUG
+
+services:
+  account-service:
+    base-url: http://localhost:8081
+  document-service:
+    base-url: http://localhost:8082
+  certification-service:
+    base-url: http://localhost:8083
+  step-up-auth-service:
+    base-url: http://localhost:8085
+  audit-service:
+    base-url: http://localhost:8088

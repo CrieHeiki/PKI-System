@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CT556 PKI Internal Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<section id="auth-screen" class="auth-screen">
+    <div class="auth-shell">
+        <div class="auth-story">
+            <span class="eyebrow">CT556 Internal PKI</span>
+            <h1>One protected entry point for the internal signing platform.</h1>
+            <p>The first page now behaves like a real internal product: user authentication comes first, and the operator enters the service dashboard only after a successful login.</p>
+
+            <div class="story-grid">
+                <article class="story-card">
+                    <h2>Internal Access Control</h2>
+                    <p>Users reach the internal portal through Nginx and the API Gateway, then authenticate before accessing signing, verification, certificate, and audit operations.</p>
+                </article>
+                <article class="story-card">
+                    <h2>Reusable Demo Workspace</h2>
+                    <p>The portal keeps one consistent environment for requester, signer, step-up, signing, verification, and audit flows without jumping between tools.</p>
+                </article>
+                <article class="story-card accent">
+                    <h2>Gateway Endpoint</h2>
+                    <p>Current entrypoint: <strong id="auth-gateway-badge">pending</strong></p>
+                </article>
+            </div>
+        </div>
+
+        <div class="auth-panel">
+            <div class="auth-panel-head">
+                <span class="eyebrow">Portal Access</span>
+                <h2>Welcome to the internal system</h2>
+                <p>Use login to enter the portal, or create a new user account that will later be activated by an admin.</p>
+            </div>
+
+            <div class="auth-tabs">
+                <button id="tab-login" class="tab-button active" type="button">Đăng nhập</button>
+                <button id="tab-register" class="tab-button" type="button">Đăng ký</button>
+            </div>
+
+            <div id="auth-feedback" class="auth-feedback hidden"></div>
+
+            <section id="login-panel" class="auth-tab-panel active">
+                <form id="operator-login-form" class="auth-form">
+                    <label>
+                        <span>Username or Email</span>
+                        <input id="operator-login-username" type="text" placeholder="admin" autocomplete="username">
+                    </label>
+                    <label>
+                        <span>Password</span>
+                        <input id="operator-login-password" type="password" placeholder="admin" autocomplete="current-password">
+                    </label>
+                    <button id="operator-login-button" class="primary-button auth-submit" type="submit">Enter Internal Portal</button>
+                </form>
+                <p class="auth-help">Dùng tài khoản đã được kích hoạt để vào hệ thống nội bộ.</p>
+            </section>
+
+            <section id="register-panel" class="auth-tab-panel">
+                <form id="portal-register-form" class="auth-form">
+                    <label>
+                        <span>Username</span>
+                        <input id="portal-register-username" type="text" placeholder="alice_req">
+                    </label>
+                    <label>
+                        <span>Email</span>
+                        <input id="portal-register-email" type="email" placeholder="alice_req@example.com">
+                    </label>
+                    <label>
+                        <span>Password</span>
+                        <input id="portal-register-password" type="password" placeholder="123456">
+                    </label>
+                    <button class="primary-button auth-submit" type="submit">Create Internal Account</button>
+                </form>
+                <p class="auth-help">Tài khoản mới sẽ ở trạng thái `PENDING` cho tới khi admin kích hoạt.</p>
+            </section>
+        </div>
+    </div>
+</section>
+
+<div id="app-shell" class="app-shell hidden">
+    <header class="portal-header">
+        <div>
+            <span class="eyebrow">Internal Portal</span>
+            <h1>CT556 PKI Service Dashboard</h1>
+        </div>
+
+        <div class="portal-actions">
+            <span class="status-pill">Gateway: <strong id="base-url-badge">pending</strong></span>
+            <span class="status-pill">Session Role: <strong id="session-role-badge">unknown</strong></span>
+            <button id="go-home" class="ghost-button" type="button">Trang chủ</button>
+            <button id="lock-console" class="ghost-button" type="button">Khóa</button>
+            <button id="logout-console" class="primary-button" type="button">Đăng xuất</button>
+        </div>
+    </header>
+
+    <main class="portal-main">
+        <section id="home-view" class="view view-active">
+            <section class="intro-panel">
+                <div>
+                    <span class="eyebrow">Giới thiệu</span>
+                    <h2>Hệ thống PKI nội bộ cho upload, cấp chứng thư, step-up, ký số, xác minh, và audit.</h2>
+                    <p id="session-summary">No operator session</p>
+                </div>
+                <div class="intro-metrics">
+                    <div class="metric-card">
+                        <span>Operator</span>
+                        <strong id="operator-name">-</strong>
+                    </div>
+                    <div class="metric-card">
+                        <span>Role</span>
+                        <strong id="operator-role">-</strong>
+                    </div>
+                    <div class="metric-card wide">
+                        <span>Account ID</span>
+                        <strong id="operator-account-id">-</strong>
+                    </div>
+                </div>
+            </section>
+
+            <section class="dashboard-panel">
+                <div class="section-head">
+                    <div>
+                        <span class="eyebrow">Service Dashboard</span>
+                        <h2>Chọn dịch vụ để sử dụng</h2>
+                    </div>
+                    <p class="section-note">Bắt đầu từ module phù hợp với tác vụ hiện tại. Trang chủ giữ vai trò giới thiệu và điều phối.</p>
+                </div>
+
+                <div class="service-grid">
+                    <article class="service-card" data-module-target="accounts">
+                        <span class="service-tag">Identity</span>
+                        <h3>Accounts</h3>
+                        <p>Đăng ký người dùng demo, đăng nhập từng vai trò, kích hoạt requester hoặc signer.</p>
+                        <button class="primary-button service-open" type="button">Open Accounts</button>
+                    </article>
+
+                    <article class="service-card" data-module-target="documents">
+                        <span class="service-tag">Documents</span>
+                        <h3>Document Service</h3>
+                        <p>Upload tài liệu thật lên MinIO, lấy metadata và kiểm tra document hiện tại.</p>
+                        <button class="primary-button service-open" type="button">Open Documents</button>
+                    </article>
+
+                    <article class="service-card" data-module-target="certificates">
+                        <span class="service-tag">PKI</span>
+                        <h3>Certification</h3>
+                        <p>Tạo yêu cầu cấp chứng thư, duyệt bằng admin, và lấy certificate dùng cho signer.</p>
+                        <button class="primary-button service-open" type="button">Open Certification</button>
+                    </article>
+
+                    <article class="service-card" data-module-target="step-up">
+                        <span class="service-tag">Sensitive Action</span>
+                        <h3>Step-up Auth</h3>
+                        <p>Tạo MFA registration, challenge Redis TTL, và xác minh proof token cho hành động nhạy cảm.</p>
+                        <button class="primary-button service-open" type="button">Open Step-up</button>
+                    </article>
+
+                    <article class="service-card" data-module-target="signing">
+                        <span class="service-tag">Workflow</span>
+                        <h3>Signing Workflow</h3>
+                        <p>Tạo yêu cầu ký, approve, execute-signing, và kiểm tra artifact kết quả.</p>
+                        <button class="primary-button service-open" type="button">Open Signing</button>
+                    </article>
+
+                    <article class="service-card" data-module-target="verification">
+                        <span class="service-tag">Verification</span>
+                        <h3>Verification Service</h3>
+                        <p>Xác minh signed output theo signing request, xem report mới nhất hoặc report gần đây.</p>
+                        <button class="primary-button service-open" type="button">Open Verification</button>
+                    </article>
+
+                    <article class="service-card" data-module-target="audit">
+                        <span class="service-tag">Immutable Trail</span>
+                        <h3>Audit Service</h3>
+                        <p>Search audit events, xem log đã ghi và kiểm tra trace của các thao tác quan trọng.</p>
+                        <button class="primary-button service-open" type="button">Open Audit</button>
+                    </article>
+
+                    <article class="service-card" data-module-target="workspace">
+                        <span class="service-tag">Context</span>
+                        <h3>Workspace State</h3>
+                        <p>Quản lý token, IDs, và các biến ngữ cảnh đang được dùng trong phiên thao tác hiện tại.</p>
+                        <button class="primary-button service-open" type="button">Open Workspace</button>
+                    </article>
+                </div>
+            </section>
+        </section>
+
+        <section id="module-view" class="view hidden">
+            <div class="module-topbar">
+                <div>
+                    <span class="eyebrow">Service Workspace</span>
+                    <h2 id="module-title">Module</h2>
+                    <p id="module-description">Choose a service from the dashboard.</p>
+                </div>
+                <button id="back-to-dashboard" class="ghost-button" type="button">Back To Dashboard</button>
+            </div>
+
+            <section id="module-accounts" class="module-section">
+                <article class="module-card">
+                    <div class="card-head">
+                        <h3>Accounts</h3>
+                        <p>Register, login, and manage requester or signer identities used in the demo flow.</p>
+                    </div>
+                    <p data-role-scope="USER" class="auth-help">User session only sees self-mapping actions here. Admin-only management buttons are hidden.</p>
+                    <div class="card-grid">
+                        <label>
+                            <span>Register Target</span>
+                            <select id="register-target">
+                                <option value="requester">Requester</option>
+                                <option value="signer">Signer</option>
+                            </select>
+                        </label>
+                        <label>
+                            <span>Username</span>
+                            <input id="register-username" type="text" placeholder="alice_req">
+                        </label>
+                        <label>
+                            <span>Email</span>
+                            <input id="register-email" type="email" placeholder="alice_req@example.com">
+                        </label>
+                        <label>
+                            <span>Password</span>
+                            <input id="register-password" type="password" placeholder="123456">
+                        </label>
+                    </div>
+                    <div class="button-row">
+                        <button id="register-user" class="primary-button" type="button">Register User</button>
+                    </div>
+
+                    <div class="separator"></div>
+
+                    <div class="card-grid">
+                        <label>
+                            <span>Login Target</span>
+                            <select id="login-target">
+                                <option value="admin">Admin</option>
+                                <option value="requester">Requester</option>
+                                <option value="signer">Signer</option>
+                            </select>
+                        </label>
+                        <label>
+                            <span>Username or Email</span>
+                            <input id="login-username" type="text" placeholder="admin">
+                        </label>
+                        <label>
+                            <span>Password</span>
+                            <input id="login-password" type="password" placeholder="admin">
+                        </label>
+                    </div>
+                    <div class="button-row">
+                        <button id="login-user" class="primary-button" type="button">Login</button>
+                        <button id="activate-requester" class="ghost-button" type="button" data-role-scope="ADMIN">Activate Requester</button>
+                        <button id="activate-signer" class="ghost-button" type="button" data-role-scope="ADMIN">Activate Signer</button>
+                        <button id="lock-requester" class="ghost-button" type="button" data-role-scope="ADMIN">Lock Requester</button>
+                        <button id="lock-signer" class="ghost-button" type="button" data-role-scope="ADMIN">Lock Signer</button>
+                        <button id="disable-requester" class="ghost-button" type="button" data-role-scope="ADMIN">Disable Requester</button>
+                        <button id="disable-signer" class="ghost-button" type="button" data-role-scope="ADMIN">Disable Signer</button>
+                    </div>
+
+                    <div class="separator"></div>
+
+                    <div class="card-grid" data-role-scope="ADMIN">
+                        <label>
+                            <span>Requester Role</span>
+                            <select id="requester-role">
+                                <option value="USER">USER</option>
+                                <option value="ADMIN">ADMIN</option>
+                            </select>
+                        </label>
+                        <label>
+                            <span>Signer Role</span>
+                            <select id="signer-role">
+                                <option value="USER">USER</option>
+                                <option value="ADMIN">ADMIN</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="button-row">
+                        <button id="get-requester-account" class="ghost-button" type="button" data-role-scope="ADMIN">Get Requester Detail</button>
+                        <button id="get-signer-account" class="ghost-button" type="button" data-role-scope="ADMIN">Get Signer Detail</button>
+                        <button id="change-requester-role" class="ghost-button" type="button" data-role-scope="ADMIN">Change Requester Role</button>
+                        <button id="change-signer-role" class="ghost-button" type="button" data-role-scope="ADMIN">Change Signer Role</button>
+                        <button id="use-current-as-requester" class="ghost-button" type="button" data-role-scope="USER">Use Current User As Requester</button>
+                        <button id="use-current-as-signer" class="ghost-button" type="button" data-role-scope="USER">Use Current User As Signer</button>
+                    </div>
+                </article>
+            </section>
+
+            <section id="module-documents" class="module-section">
+                <article class="module-card">
+                    <div class="card-head">
+                        <h3>Documents</h3>
+                        <p>Upload a real file as requester and keep `documentId` synced with the current workspace.</p>
+                    </div>
+                    <div class="card-grid">
+                        <label>
+                            <span>Title</span>
+                            <input id="document-title" type="text" placeholder="Test signing document">
+                        </label>
+                        <label>
+                            <span>Description</span>
+                            <input id="document-description" type="text" placeholder="Level-1 signing payload">
+                        </label>
+                        <label class="wide">
+                            <span>File</span>
+                            <input id="document-file" type="file">
+                        </label>
+                    </div>
+                    <div class="button-row">
+                        <button id="upload-document" class="primary-button" type="button">Upload Document</button>
+                        <button id="upload-document-version" class="ghost-button" type="button">Upload New Version</button>
+                        <button id="list-my-documents" class="ghost-button" type="button">List My Documents</button>
+                        <button id="get-document-detail" class="ghost-button" type="button">Get Document Detail</button>
+                        <button id="download-document" class="ghost-button" type="button">Download Current Version</button>
+                        <button id="list-all-documents" class="ghost-button" type="button" data-role-scope="ADMIN">List All Documents</button>
+                    </div>
+                </article>
+            </section>
+
+            <section id="module-certificates" class="module-section">
+                <article class="module-card">
+                    <div class="card-head">
+                        <h3>Certification</h3>
+                        <p>Request, inspect, renew, approve, reject, and revoke certificates depending on role.</p>
+                    </div>
+                    <div class="card-grid">
+                        <label>
+                            <span>Common Name</span>
+                            <input id="certificate-common-name" type="text" placeholder="bob-sign.ct556.local">
+                        </label>
+                        <label>
+                            <span>Organization</span>
+                            <input id="certificate-organization" type="text" placeholder="CT556">
+                        </label>
+                        <label>
+                            <span>Country</span>
+                            <input id="certificate-country" type="text" placeholder="VN">
+                        </label>
+                        <label>
+                            <span>TTL</span>
+                            <input id="certificate-ttl" type="text" placeholder="720h">
+                        </label>
+                        <label>
+                            <span>Renewal TTL</span>
+                            <input id="certificate-renewal-ttl" type="text" placeholder="720h">
+                        </label>
+                        <label class="wide">
+                            <span>Reject / Renewal Reason</span>
+                            <input id="certificate-reason" type="text" placeholder="Reason for reject or renewal">
+                        </label>
+                    </div>
+                    <div class="button-row">
+                        <button id="create-certificate-request" class="primary-button" type="button">Create Certificate Request</button>
+                        <button id="list-my-certificate-requests" class="ghost-button" type="button">List My Requests</button>
+                        <button id="get-certificate-request" class="ghost-button" type="button">Get Request Detail</button>
+                        <button id="list-my-certificates" class="ghost-button" type="button">List My Certificates</button>
+                        <button id="get-certificate-detail" class="ghost-button" type="button">Get Certificate Detail</button>
+                        <button id="create-renewal-request" class="ghost-button" type="button">Create Renewal Request</button>
+                        <button id="revoke-my-certificate" class="ghost-button" type="button">Revoke My Certificate</button>
+                        <button id="approve-certificate-request" class="ghost-button" type="button" data-role-scope="ADMIN">Approve Request</button>
+                        <button id="reject-certificate-request" class="ghost-button" type="button" data-role-scope="ADMIN">Reject Request</button>
+                        <button id="list-all-certificate-requests" class="ghost-button" type="button" data-role-scope="ADMIN">List All Requests</button>
+                        <button id="list-all-certificates" class="ghost-button" type="button" data-role-scope="ADMIN">List All Certificates</button>
+                        <button id="revoke-admin-certificate" class="ghost-button" type="button" data-role-scope="ADMIN">Admin Revoke Certificate</button>
+                    </div>
+                </article>
+            </section>
+
+            <section id="module-step-up" class="module-section">
+                <article class="module-card">
+                    <div class="card-head">
+                        <h3>Step-up Auth</h3>
+                        <p>Register an MFA method, mint a Redis-backed challenge, and verify it for the signing action.</p>
+                    </div>
+                    <div class="card-grid">
+                        <label>
+                            <span>Actor</span>
+                            <select id="step-up-actor">
+                                <option value="signer">Signer</option>
+                                <option value="requester">Requester</option>
+                            </select>
+                        </label>
+                        <label>
+                            <span>MFA Type</span>
+                            <select id="step-up-mfa-type">
+                                <option value="EMAIL_OTP">EMAIL_OTP</option>
+                                <option value="SMS_OTP">SMS_OTP</option>
+                                <option value="TOTP">TOTP</option>
+                            </select>
+                        </label>
+                        <label>
+                            <span>Issuer</span>
+                            <input id="step-up-issuer" type="text" placeholder="CT556 PKI">
+                        </label>
+                        <label>
+                            <span>Label</span>
+                            <input id="step-up-label" type="text" placeholder="bob_sign@example.com">
+                        </label>
+                        <label>
+                            <span>Action</span>
+                            <input id="step-up-action" type="text" placeholder="SIGN_DOCUMENT">
+                        </label>
+                        <label>
+                            <span>Target Type</span>
+                            <input id="step-up-target-type" type="text" placeholder="SIGNING_REQUEST">
+                        </label>
+                        <label>
+                            <span>Target ID</span>
+                            <input id="step-up-target-id" type="text" placeholder="Defaults to current signingRequestId">
+                        </label>
+                        <label class="wide">
+                            <span>OTP Code</span>
+                            <input id="step-up-otp-code" type="text" placeholder="Use challengeCode returned by the API">
+                        </label>
+                    </div>
+                    <div class="button-row">
+                        <button id="create-mfa-registration" class="primary-button" type="button">Create MFA Registration</button>
+                        <button id="list-mfa-registrations" class="ghost-button" type="button">List My MFA</button>
+                        <button id="disable-mfa" class="ghost-button" type="button">Disable MFA</button>
+                    </div>
+                    <div class="button-row">
+                        <button id="create-step-up-challenge" class="primary-button" type="button">Create Challenge</button>
+                        <button id="verify-step-up-challenge" class="ghost-button" type="button">Verify Challenge</button>
+                    </div>
+                </article>
+            </section>
+
+            <section id="module-signing" class="module-section">
+                <article class="module-card">
+                    <div class="card-head">
+                        <h3>Signing Workflow</h3>
+                        <p>Create, approve, reject, cancel, execute, and inspect a signing request.</p>
+                    </div>
+                    <div class="card-grid">
+                        <label class="wide">
+                            <span>Workflow Note</span>
+                            <input id="signing-note" type="text" placeholder="Please sign this document">
+                        </label>
+                        <label class="wide">
+                            <span>Reject Note</span>
+                            <input id="signing-reject-note" type="text" placeholder="Reject reason">
+                        </label>
+                    </div>
+                    <div class="button-row">
+                        <button id="create-signing-request" class="primary-button" type="button">Create Signing Request</button>
+                        <button id="list-requested-by-me" class="ghost-button" type="button">Requested By Me</button>
+                        <button id="list-pending-for-me" class="ghost-button" type="button">Pending For Me</button>
+                        <button id="approve-signing-request" class="ghost-button" type="button">Approve Signing Request</button>
+                        <button id="reject-signing-request" class="ghost-button" type="button">Reject Signing Request</button>
+                        <button id="cancel-signing-request" class="ghost-button" type="button">Cancel Signing Request</button>
+                        <button id="execute-signing-request" class="ghost-button" type="button">Execute Signing</button>
+                        <button id="get-signing-request" class="ghost-button" type="button">Get Signing Detail</button>
+                        <button id="list-all-signing-requests" class="ghost-button" type="button" data-role-scope="ADMIN">List All Signing Requests</button>
+                    </div>
+                </article>
+            </section>
+
+            <section id="module-verification" class="module-section">
+                <article class="module-card">
+                    <div class="card-head">
+                        <h3>Verification</h3>
+                        <p>Verify by request ID, fetch the latest report, or browse recent results.</p>
+                    </div>
+                    <div class="card-grid">
+                        <label>
+                            <span>Trust Source</span>
+                            <select id="verification-trust-source">
+                                <option value="INTERNAL_CA">INTERNAL_CA</option>
+                                <option value="EXTERNAL_CA">EXTERNAL_CA</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="button-row">
+                        <button id="verify-signing-request" class="primary-button" type="button">Verify By Request ID</button>
+                        <button id="load-latest-verification" class="ghost-button" type="button">Load Latest For Request</button>
+                        <button id="load-recent-verifications" class="ghost-button" type="button">Load Recent Reports</button>
+                        <button id="get-verification-report" class="ghost-button" type="button">Get Report By ID</button>
+                    </div>
+                </article>
+            </section>
+
+            <section id="module-audit" class="module-section">
+                <article class="module-card">
+                    <div class="card-head">
+                        <h3>Audit</h3>
+                        <p>Search audit events and inspect the immutable trail already generated by the services.</p>
+                    </div>
+                    <p data-role-scope="USER" class="auth-help">Audit browsing is reserved for admins. User actions still generate audit records automatically.</p>
+                    <div class="card-grid">
+                        <label>
+                            <span>Event Type</span>
+                            <input id="audit-event-type" type="text" placeholder="REQUEST_SIGNED">
+                        </label>
+                        <label>
+                            <span>Resource Type</span>
+                            <input id="audit-resource-type" type="text" placeholder="SIGNING_REQUEST">
+                        </label>
+                        <label>
+                            <span>Correlation ID</span>
+                            <input id="audit-correlation-id" type="text" placeholder="demo-001">
+                        </label>
+                        <label class="wide">
+                            <span>Summary</span>
+                            <input id="audit-summary" type="text" placeholder="Signed output verified successfully">
+                        </label>
+                    </div>
+                    <div class="button-row">
+                        <button id="create-audit-event" class="primary-button" type="button" data-role-scope="ADMIN">Create Audit Event</button>
+                        <button id="search-audit-events" class="ghost-button" type="button" data-role-scope="ADMIN">Search Audit Events</button>
+                        <button id="get-audit-event" class="ghost-button" type="button" data-role-scope="ADMIN">Get Audit Event</button>
+                    </div>
+                </article>
+            </section>
+
+            <section id="module-workspace" class="module-section">
+                <article class="module-card">
+                    <div class="card-head">
+                        <h3>Workspace State</h3>
+                        <p>Manage the local tokens and identifiers used across the current session.</p>
+                    </div>
+
+                    <div class="module-toolbar compact">
+                        <button id="save-state" class="primary-button" type="button">Save Workspace State</button>
+                        <button id="reset-state" class="ghost-button" type="button">Reset Local State</button>
+                        <button id="map-operator-to-requester" class="ghost-button" type="button" data-role-scope="USER">Map Current User To Requester</button>
+                        <button id="map-operator-to-signer" class="ghost-button" type="button" data-role-scope="USER">Map Current User To Signer</button>
+                    </div>
+
+                    <div class="card-grid">
+                        <label class="wide">
+                            <span>Gateway Base URL</span>
+                            <input id="base-url" type="text" placeholder="http://localhost:8080">
+                        </label>
+                        <label>
+                            <span>Admin Token</span>
+                            <textarea id="admin-token" rows="3"></textarea>
+                        </label>
+                        <label>
+                            <span>Requester Token</span>
+                            <textarea id="requester-token" rows="3"></textarea>
+                        </label>
+                        <label>
+                            <span>Signer Token</span>
+                            <textarea id="signer-token" rows="3"></textarea>
+                        </label>
+                        <label>
+                            <span>Requester Account ID</span>
+                            <input id="requester-account-id" type="text">
+                        </label>
+                        <label>
+                            <span>Signer Account ID</span>
+                            <input id="signer-account-id" type="text">
+                        </label>
+                        <label>
+                            <span>Document ID</span>
+                            <input id="document-id" type="text">
+                        </label>
+                        <label>
+                            <span>Certificate Request ID</span>
+                            <input id="certificate-request-id" type="text">
+                        </label>
+                        <label>
+                            <span>Certificate ID</span>
+                            <input id="certificate-id" type="text">
+                        </label>
+                        <label>
+                            <span>MFA Registration ID</span>
+                            <input id="mfa-registration-id" type="text">
+                        </label>
+                        <label>
+                            <span>Step-up Challenge ID</span>
+                            <input id="step-up-challenge-id" type="text">
+                        </label>
+                        <label>
+                            <span>Step-up Verification Token</span>
+                            <textarea id="step-up-verification-token" rows="3"></textarea>
+                        </label>
+                        <label>
+                            <span>Signing Request ID</span>
+                            <input id="signing-request-id" type="text">
+                        </label>
+                        <label>
+                            <span>Verification Report ID</span>
+                            <input id="verification-report-id" type="text">
+                        </label>
+                        <label>
+                            <span>Audit Event ID</span>
+                            <input id="audit-event-id" type="text">
+                        </label>
+                    </div>
+                </article>
+            </section>
+        </section>
+
+        <section class="console">
+            <div class="console-head">
+                <div>
+                    <span class="eyebrow">Response</span>
+                    <h3 id="console-title">Ready</h3>
+                </div>
+                <span id="console-status" class="console-status idle">No request yet</span>
+            </div>
+            <pre id="console-output">Đăng nhập trước, sau đó chọn một dịch vụ từ dashboard để thao tác.</pre>
+        </section>
+    </main>
+</div>
+
+<script src="/app.js" defer></script>
+</body>
+</html>
