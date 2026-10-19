@@ -1,208 +1,0 @@
-Apache Maven 3.9.12 (848fbb4bf2d427b72bdb2471c22fced7ebd9a7a1)
-Maven home: C:\Users\DAT\.m2\wrapper\dists\apache-maven-3.9.12\59fe215c0ad6947fea90184bf7add084544567b927287592651fda3782e0e798
-Java version: 22.0.1, vendor: Oracle Corporation, runtime: C:\Program Files\Java\jdk-22
-Default locale: en_US, platform encoding: UTF-8
-OS name: "windows 11", version: "10.0", arch: "amd64", family: "windows"
-[DEBUG] Created new class realm maven.api
-[DEBUG] Importing foreign packages into class realm maven.api
-[DEBUG]   Imported: javax.annotation.* < plexus.core
-[DEBUG]   Imported: javax.annotation.security.* < plexus.core
-[DEBUG]   Imported: javax.inject.* < plexus.core
-[DEBUG]   Imported: org.apache.maven.* < plexus.core
-[DEBUG]   Imported: org.apache.maven.artifact < plexus.core
-[DEBUG]   Imported: org.apache.maven.classrealm < plexus.core
-[DEBUG]   Imported: org.apache.maven.cli < plexus.core
-[DEBUG]   Imported: org.apache.maven.configuration < plexus.core
-[DEBUG]   Imported: org.apache.maven.exception < plexus.core
-[DEBUG]   Imported: org.apache.maven.execution < plexus.core
-[DEBUG]   Imported: org.apache.maven.execution.scope < plexus.core
-[DEBUG]   Imported: org.apache.maven.graph < plexus.core
-[DEBUG]   Imported: org.apache.maven.lifecycle < plexus.core
-[DEBUG]   Imported: org.apache.maven.model < plexus.core
-[DEBUG]   Imported: org.apache.maven.monitor < plexus.core
-[DEBUG]   Imported: org.apache.maven.plugin < plexus.core
-[DEBUG]   Imported: org.apache.maven.profiles < plexus.core
-[DEBUG]   Imported: org.apache.maven.project < plexus.core
-[DEBUG]   Imported: org.apache.maven.reporting < plexus.core
-[DEBUG]   Imported: org.apache.maven.repository < plexus.core
-[DEBUG]   Imported: org.apache.maven.rtinfo < plexus.core
-[DEBUG]   Imported: org.apache.maven.settings < plexus.core
-[DEBUG]   Imported: org.apache.maven.toolchain < plexus.core
-[DEBUG]   Imported: org.apache.maven.usability < plexus.core
-[DEBUG]   Imported: org.apache.maven.wagon.* < plexus.core
-[DEBUG]   Imported: org.apache.maven.wagon.authentication < plexus.core
-[DEBUG]   Imported: org.apache.maven.wagon.authorization < plexus.core
-[DEBUG]   Imported: org.apache.maven.wagon.events < plexus.core
-[DEBUG]   Imported: org.apache.maven.wagon.observers < plexus.core
-[DEBUG]   Imported: org.apache.maven.wagon.proxy < plexus.core
-[DEBUG]   Imported: org.apache.maven.wagon.repository < plexus.core
-[DEBUG]   Imported: org.apache.maven.wagon.resource < plexus.core
-[DEBUG]   Imported: org.codehaus.classworlds < plexus.core
-[DEBUG]   Imported: org.codehaus.plexus.* < plexus.core
-[DEBUG]   Imported: org.codehaus.plexus.classworlds < plexus.core
-[DEBUG]   Imported: org.codehaus.plexus.component < plexus.core
-[DEBUG]   Imported: org.codehaus.plexus.configuration < plexus.core
-[DEBUG]   Imported: org.codehaus.plexus.container < plexus.core
-[DEBUG]   Imported: org.codehaus.plexus.context < plexus.core
-[DEBUG]   Imported: org.codehaus.plexus.lifecycle < plexus.core
-[DEBUG]   Imported: org.codehaus.plexus.logging < plexus.core
-[DEBUG]   Imported: org.codehaus.plexus.personality < plexus.core
-[DEBUG]   Imported: org.codehaus.plexus.util.xml.Xpp3Dom < plexus.core
-[DEBUG]   Imported: org.codehaus.plexus.util.xml.pull.XmlPullParser < plexus.core
-[DEBUG]   Imported: org.codehaus.plexus.util.xml.pull.XmlPullParserException < plexus.core
-[DEBUG]   Imported: org.codehaus.plexus.util.xml.pull.XmlSerializer < plexus.core
-[DEBUG]   Imported: org.eclipse.aether.* < plexus.core
-[DEBUG]   Imported: org.eclipse.aether.artifact < plexus.core
-[DEBUG]   Imported: org.eclipse.aether.collection < plexus.core
-[DEBUG]   Imported: org.eclipse.aether.deployment < plexus.core
-[DEBUG]   Imported: org.eclipse.aether.graph < plexus.core
-[DEBUG]   Imported: org.eclipse.aether.impl < plexus.core
-[DEBUG]   Imported: org.eclipse.aether.installation < plexus.core
-[DEBUG]   Imported: org.eclipse.aether.internal.impl < plexus.core
-[DEBUG]   Imported: org.eclipse.aether.metadata < plexus.core
-[DEBUG]   Imported: org.eclipse.aether.repository < plexus.core
-[DEBUG]   Imported: org.eclipse.aether.resolution < plexus.core
-[DEBUG]   Imported: org.eclipse.aether.spi < plexus.core
-[DEBUG]   Imported: org.eclipse.aether.transfer < plexus.core
-[DEBUG]   Imported: org.eclipse.aether.util < plexus.core
-[DEBUG]   Imported: org.eclipse.aether.version < plexus.core
-[DEBUG]   Imported: org.fusesource.jansi.* < plexus.core
-[DEBUG]   Imported: org.slf4j.* < plexus.core
-[DEBUG]   Imported: org.slf4j.event.* < plexus.core
-[DEBUG]   Imported: org.slf4j.helpers.* < plexus.core
-[DEBUG]   Imported: org.slf4j.spi.* < plexus.core
-[DEBUG] Populating class realm maven.api
-[DEBUG] Created adapter factory; available factories [file-lock, rwlock-local, semaphore-local, noop]; available name mappers [discriminating, file-gaecv, file-gav, file-hgaecv, file-hgav, file-static, gaecv, gav, static]
-[INFO] Error stacktraces are turned on.
-[DEBUG] Message scheme: color
-[DEBUG] Message styles: debug info warning error success failure strong mojo project
-[DEBUG] Reading global settings from C:\Users\DAT\.m2\wrapper\dists\apache-maven-3.9.12\59fe215c0ad6947fea90184bf7add084544567b927287592651fda3782e0e798\conf\settings.xml
-[DEBUG] Reading user settings from C:\Users\DAT\.m2\settings.xml
-[DEBUG] Reading global toolchains from C:\Users\DAT\.m2\wrapper\dists\apache-maven-3.9.12\59fe215c0ad6947fea90184bf7add084544567b927287592651fda3782e0e798\conf\toolchains.xml
-[DEBUG] Reading user toolchains from C:\Users\DAT\.m2\toolchains.xml
-[DEBUG] Using local repository at C:\Users\DAT\.m2\repository
-[DEBUG] Using manager EnhancedLocalRepositoryManager with priority 10.0 for C:\Users\DAT\.m2\repository
-[INFO] Scanning for projects...
-[DEBUG] Creating adapter using nameMapper 'gaecv' and factory 'rwlock-local'
-[DEBUG] Extension realms for project com.ct556:signing-workflow-service:jar:0.0.1-SNAPSHOT: (none)
-[DEBUG] Looking up lifecycle mappings for packaging jar from ClassRealm[plexus.core, parent: null]
-[DEBUG] Extension realms for project org.springframework.boot:spring-boot-starter-parent:pom:3.5.11: (none)
-[DEBUG] Looking up lifecycle mappings for packaging pom from ClassRealm[plexus.core, parent: null]
-[DEBUG] Extension realms for project org.springframework.boot:spring-boot-dependencies:pom:3.5.11: (none)
-[DEBUG] Looking up lifecycle mappings for packaging pom from ClassRealm[plexus.core, parent: null]
-[DEBUG] Resolving plugin prefix X from [org.apache.maven.plugins, org.codehaus.mojo]
-[DEBUG] Could not find metadata org.springframework.boot/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata org.cyclonedx/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata org.flywaydb/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata io.github.git-commit-id/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata org.jooq/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata org.jetbrains.kotlin/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata org.liquibase/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata org.graalvm.buildtools/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata org.apache.maven.plugins/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata org.codehaus.mojo/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata org.springframework.boot/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata org.cyclonedx/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata org.flywaydb/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata io.github.git-commit-id/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata org.jooq/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata org.jetbrains.kotlin/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata org.liquibase/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata org.graalvm.buildtools/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata org.apache.maven.plugins/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata org.codehaus.mojo/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Using transporter HttpTransporter with priority 5.0 for https://repo.maven.apache.org/maven2
-[DEBUG] Using transporter HttpTransporter with priority 5.0 for https://repo.maven.apache.org/maven2
-[DEBUG] Using transporter HttpTransporter with priority 5.0 for https://repo.maven.apache.org/maven2
-[DEBUG] Using transporter HttpTransporter with priority 5.0 for https://repo.maven.apache.org/maven2
-[DEBUG] Using connector BasicRepositoryConnector with priority 0.0 for https://repo.maven.apache.org/maven2
-[DEBUG] Using connector BasicRepositoryConnector with priority 0.0 for https://repo.maven.apache.org/maven2
-[DEBUG] Using connector BasicRepositoryConnector with priority 0.0 for https://repo.maven.apache.org/maven2
-[DEBUG] Using connector BasicRepositoryConnector with priority 0.0 for https://repo.maven.apache.org/maven2
-Downloading from central: https://repo.maven.apache.org/maven2/org/cyclonedx/maven-metadata.xml
-Downloading from central: https://repo.maven.apache.org/maven2/io/github/git-commit-id/maven-metadata.xml
-Downloading from central: https://repo.maven.apache.org/maven2/org/flywaydb/maven-metadata.xml
-Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/maven-metadata.xml
-Progress (1): maven-metadata.xml (255 B)Progress (2): maven-metadata.xml (255 B) | maven-metadata.xml (234 B)Progress (3): maven-metadata.xml (255 B) | maven-metadata.xml (234 B) | maven-metadata.xml (249 B)Progress (4): maven-metadata.xml (255 B) | maven-metadata.xml (234 B) | maven-metadata.xml (249 B) | maven-metadata.xml (243 B)                                                                                                                               Downloaded from central: https://repo.maven.apache.org/maven2/org/cyclonedx/maven-metadata.xml (243 B at 329 B/s)
-Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/boot/maven-metadata.xml (249 B at 337 B/s)
-[DEBUG] Using transporter HttpTransporter with priority 5.0 for https://repo.maven.apache.org/maven2
-Downloaded from central: https://repo.maven.apache.org/maven2/io/github/git-commit-id/maven-metadata.xml (255 B at 343 B/s)
-[DEBUG] Using connector BasicRepositoryConnector with priority 0.0 for https://repo.maven.apache.org/maven2
-Downloaded from central: https://repo.maven.apache.org/maven2/org/flywaydb/maven-metadata.xml (234 B at 314 B/s)
-[DEBUG] Using transporter HttpTransporter with priority 5.0 for https://repo.maven.apache.org/maven2
-Downloading from central: https://repo.maven.apache.org/maven2/org/jooq/maven-metadata.xml
-[DEBUG] Using transporter HttpTransporter with priority 5.0 for https://repo.maven.apache.org/maven2
-[DEBUG] Using transporter HttpTransporter with priority 5.0 for https://repo.maven.apache.org/maven2
-[DEBUG] Using connector BasicRepositoryConnector with priority 0.0 for https://repo.maven.apache.org/maven2
-[DEBUG] Using connector BasicRepositoryConnector with priority 0.0 for https://repo.maven.apache.org/maven2
-Downloading from central: https://repo.maven.apache.org/maven2/org/graalvm/buildtools/maven-metadata.xml
-[DEBUG] Using connector BasicRepositoryConnector with priority 0.0 for https://repo.maven.apache.org/maven2
-Downloading from central: https://repo.maven.apache.org/maven2/org/liquibase/maven-metadata.xml
-Downloading from central: https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/maven-metadata.xml
-Progress (1): maven-metadata.xml (398 B)                                        [DEBUG] Using transporter HttpTransporter with priority 5.0 for https://repo.maven.apache.org/maven2
-[DEBUG] Using connector BasicRepositoryConnector with priority 0.0 for https://repo.maven.apache.org/maven2
-Downloaded from central: https://repo.maven.apache.org/maven2/org/jooq/maven-metadata.xml (398 B at 5.2 kB/s)
-Progress (1): maven-metadata.xml (242 B)                                        Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-metadata.xml
-[DEBUG] Using transporter HttpTransporter with priority 5.0 for https://repo.maven.apache.org/maven2
-Progress (2): maven-metadata.xml (242 B) | maven-metadata.xml (375 B)[DEBUG] Using connector BasicRepositoryConnector with priority 0.0 for https://repo.maven.apache.org/maven2
-                                                                     Downloaded from central: https://repo.maven.apache.org/maven2/org/graalvm/buildtools/maven-metadata.xml (242 B at 2.9 kB/s)
-Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/maven-metadata.xml
-Downloaded from central: https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/maven-metadata.xml (375 B at 4.6 kB/s)
-Progress (1): maven-metadata.xml (394 B)                                        Downloaded from central: https://repo.maven.apache.org/maven2/org/liquibase/maven-metadata.xml (394 B at 4.3 kB/s)
-Progress (1): maven-metadata.xml (4.6 kB)Progress (1): maven-metadata.xml (9.7 kB)Progress (1): maven-metadata.xml (14 kB) Progress (2): maven-metadata.xml (14 kB) | maven-metadata.xml (3.1 kB)Progress (2): maven-metadata.xml (14 kB) | maven-metadata.xml (7.7 kB)Progress (2): maven-metadata.xml (14 kB) | maven-metadata.xml (12 kB) Progress (2): maven-metadata.xml (14 kB) | maven-metadata.xml (17 kB)Progress (2): maven-metadata.xml (14 kB) | maven-metadata.xml (20 kB)Progress (2): maven-metadata.xml (14 kB) | maven-metadata.xml (21 kB)                                                                     Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-metadata.xml (14 kB at 152 kB/s)
-Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/maven-metadata.xml (21 kB at 138 kB/s)
-[DEBUG] Writing tracking file 'C:\Users\DAT\.m2\repository\org\springframework\boot\resolver-status.properties'
-[DEBUG] Writing tracking file 'C:\Users\DAT\.m2\repository\org\cyclonedx\resolver-status.properties'
-[DEBUG] Writing tracking file 'C:\Users\DAT\.m2\repository\org\flywaydb\resolver-status.properties'
-[DEBUG] Writing tracking file 'C:\Users\DAT\.m2\repository\io\github\git-commit-id\resolver-status.properties'
-[DEBUG] Writing tracking file 'C:\Users\DAT\.m2\repository\org\jooq\resolver-status.properties'
-[DEBUG] Writing tracking file 'C:\Users\DAT\.m2\repository\org\jetbrains\kotlin\resolver-status.properties'
-[DEBUG] Writing tracking file 'C:\Users\DAT\.m2\repository\org\liquibase\resolver-status.properties'
-[DEBUG] Writing tracking file 'C:\Users\DAT\.m2\repository\org\graalvm\buildtools\resolver-status.properties'
-[DEBUG] Writing tracking file 'C:\Users\DAT\.m2\repository\org\apache\maven\plugins\resolver-status.properties'
-[DEBUG] Writing tracking file 'C:\Users\DAT\.m2\repository\org\codehaus\mojo\resolver-status.properties'
-[DEBUG] Could not find metadata org.springframework.boot/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata org.cyclonedx/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata org.flywaydb/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata io.github.git-commit-id/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata org.jooq/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata org.jetbrains.kotlin/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata org.liquibase/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata org.graalvm.buildtools/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata org.apache.maven.plugins/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[DEBUG] Could not find metadata org.codehaus.mojo/maven-metadata.xml in local (C:\Users\DAT\.m2\repository)
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  3.159 s
-[INFO] Finished at: 2026-03-31T00:38:56+07:00
-[INFO] ------------------------------------------------------------------------
-[ERROR] No plugin found for prefix 'X' in the current project and in the plugin groups [org.springframework.boot, org.cyclonedx, org.flywaydb, io.github.git-commit-id, org.jooq, org.jetbrains.kotlin, org.liquibase, org.graalvm.buildtools, org.apache.maven.plugins, org.codehaus.mojo] available from the repositories [local (C:\Users\DAT\.m2\repository), central (https://repo.maven.apache.org/maven2)] -> [Help 1]
-org.apache.maven.plugin.prefix.NoPluginFoundForPrefixException: No plugin found for prefix 'X' in the current project and in the plugin groups [org.springframework.boot, org.cyclonedx, org.flywaydb, io.github.git-commit-id, org.jooq, org.jetbrains.kotlin, org.liquibase, org.graalvm.buildtools, org.apache.maven.plugins, org.codehaus.mojo] available from the repositories [local (C:\Users\DAT\.m2\repository), central (https://repo.maven.apache.org/maven2)]
-    at org.apache.maven.plugin.prefix.internal.DefaultPluginPrefixResolver.resolve (DefaultPluginPrefixResolver.java:122)
-    at org.apache.maven.lifecycle.internal.MojoDescriptorCreator.findPluginForPrefix (MojoDescriptorCreator.java:247)
-    at org.apache.maven.lifecycle.internal.MojoDescriptorCreator.getMojoDescriptor (MojoDescriptorCreator.java:209)
-    at org.apache.maven.lifecycle.internal.DefaultLifecycleTaskSegmentCalculator.calculateTaskSegments (DefaultLifecycleTaskSegmentCalculator.java:94)
-    at org.apache.maven.lifecycle.internal.DefaultLifecycleTaskSegmentCalculator.calculateTaskSegments (DefaultLifecycleTaskSegmentCalculator.java:76)
-    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:84)
-    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:261)
-    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:173)
-    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:101)
-    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:919)
-    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:285)
-    at org.apache.maven.cli.MavenCli.main (MavenCli.java:207)
-    at jdk.internal.reflect.DirectMethodHandleAccessor.invoke (DirectMethodHandleAccessor.java:103)
-    at java.lang.reflect.Method.invoke (Method.java:580)
-    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:255)
-    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:201)
-    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:361)
-    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:314)
-[ERROR] 
-[ERROR] 
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/NoPluginFoundForPrefixException
-[DEBUG] Shutting down adapter factory; available factories [file-lock, rwlock-local, semaphore-local, noop]; available name mappers [discriminating, file-gaecv, file-gav, file-hgaecv, file-hgav, file-static, gaecv, gav, static]
-[DEBUG] Shutting down 'file-lock' factory
-[DEBUG] Shutting down 'rwlock-local' factory
-[DEBUG] Shutting down 'semaphore-local' factory
-[DEBUG] Shutting down 'noop' factory

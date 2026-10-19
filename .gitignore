@@ -1,0 +1,40 @@
+# Runtime state, logs and crash outputs (do not commit)
+.runtime/
+logs/
+**/logs/
+*.log
+hs_err_pid*
+replay_pid*
+
+# HashiCorp Vault file backend: contains state and potentially sensitive key material
+infra/vault/data/
+
+# Local credentials and key material
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+
+# Java / Maven build output
+**/target/
+**/.classpath
+**/.project
+**/.settings/
+
+# Node / Vite output
+**/node_modules/
+**/dist/
+**/dist-ssr/
+
+# IDE and OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.iml
